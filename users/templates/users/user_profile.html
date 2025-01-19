@@ -1,0 +1,105 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Traveler &mdash; journey</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="travel Website " />
+	<meta name="keywords" content="travel" />
+	<meta name="author" content="travel" />
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/userform.css' %}">
+
+  <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+  <title>User profile</title>
+</head>
+<body>
+  <div class="gtco-container">
+  <div id="page">
+  <div class="card">
+    <div class="card_background_img"></div>
+    <div class="card_profile_img"></div>
+    <div class="user_details">
+      <h1>{{ username }}</h1>
+      <p>Email: {{ email }}</p>
+      <form method="get" action="{% url 'users:edit_profile' %}">
+        {% csrf_token %}
+        <button class="edit-profile-btn" id="editProfileBtn" >Edit Profile</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.getElementById("editProfileBtn").addEventListener("click", function() {
+      window.location.href = "editprofile.html";
+    });
+
+// Load and display data from local storage
+window.onload = function() {
+  const backgroundImg = localStorage.getItem('backgroundImg');
+  const profileImg = localStorage.getItem('profileImg');
+  const userName = localStorage.getItem('userName');
+  const numberOfPlans = localStorage.getItem('numberOfPlans');
+  const email = localStorage.getItem('email');
+
+  if (backgroundImg) {
+    document.querySelector('.card_background_img').style.backgroundImage = `url(${backgroundImg})`;
+  }
+
+  if (profileImg) {
+    document.querySelector('.card_profile_img').style.backgroundImage = `url(${profileImg})`;
+  }
+
+  if (userName) {
+    document.querySelector('.user_details h1').textContent = userName;
+  }
+
+  if (numberOfPlans) {
+    document.querySelector('.user_details p:nth-of-type(1)').textContent = `Number of plans: ${numberOfPlans}`;
+  }
+
+  if (email) {
+    document.querySelector('.user_details p:nth-of-type(2)').textContent = `Email: ${email}`;
+  }
+};
+  </script>
+{% endblock content %}
+</body>
+</html>

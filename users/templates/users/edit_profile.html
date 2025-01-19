@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Traveler &mdash; journey</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="travel Website " />
+	<meta name="keywords" content="travel" />
+	<meta name="author" content="travel" />
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+		
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+
+	<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+
+	<link rel="stylesheet" href="{% static 'css/editprofile.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+<div id="page">
+    <div class="form-container">
+	<h2>Edit Profile</h2>
+    <form id="editProfileForm" method="POST" action="{% url 'users:edit_profile' %}">
+		{% csrf_token %}
+        <label for="user_name">Name:</label>
+        <input type="text" id="username" name="username" value="{{ user.username }}">
+
+        <label for="number_of_plans">Number of Plans:</label>
+        <input type="number" id="number_of_plans" name="number_of_plans" value="">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter email address"value="{{ user.email }}">
+        
+        <label for="password">Change Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter password">
+        
+
+        <button type="submit">Save Changes</button>
+        <button type="button" class="cancel-btn" id="cancelButton">Cancel</button>
+    </form>
+    </div>
+	
+<script>
+	document.getElementById("cancelButton").onclick = function() {
+		window.location.href = "{% url 'users:view_profile' %}";
+	};
+</script>
+{% endblock content %}
+</body>
+
+</html>
